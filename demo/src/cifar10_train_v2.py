@@ -15,12 +15,13 @@ n_epochs = 50
 Transforms = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.RandomHorizontalFlip(p=0.5),
+    # 神了，加上下翻转有效果，加水平翻转就不行？？？ vertical直接掉0.2%了
     # transforms.RandomVerticalFlip(p=0.5),
     transforms.ToTensor(),
     transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
 
 
-#  load
+
 train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=Transforms)
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=128, shuffle=True, num_workers=0)
 
