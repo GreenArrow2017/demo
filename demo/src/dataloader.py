@@ -24,7 +24,8 @@ def MNIST_dataloader(train=True, batch_size=64, transform = None, shuffle=True):
                                              shuffle=shuffle)
     return dataloader
 
-
+# 放缩，翻转再不同场景效果就完成不一样的了，放缩再CIFAR有用，再MNIST没用，我怀疑是MNIST的放缩使得图片有二义性，而CIFAR不会
+# 只能一个个去试了
 def img_normalize(t):
     c, x, y = t.shape
     t = t.view(c, -1)
