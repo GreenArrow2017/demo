@@ -29,20 +29,18 @@ test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=128, shuffle=
 
 
 
-# 定义模型
+# resnet 101跑不起来
 # myModel = torchvision.models.resnet101(pretrained=True)
 myModel = torchvision.models.resnet50(pretrained=True)
 # myModel = torchvision.models.resnet152(pretrained=True)
-# 将原来的ResNet18的最后两层全连接层拿掉,替换成一个输出单元为10的全连接层
+# 最后一层用一个fc效果不如两个好了
 inchannel = myModel.fc.in_features
 myModel.fc = nn.Linear(inchannel, 10)
 
-# 损失函数及优化器
-# GPU加速
 myDevice = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 myModel = myModel.to(myDevice)
 
-
+# learning_rate = 0.01
 learning_rate=0.001
 myOptimzier = optim.SGD(myModel.parameters(), lr = learning_rate, momentum=0.9)
 myLoss = torch.nn.CrossEntropyLoss()
@@ -69,7 +67,7 @@ for _epoch in range(n_epochs):
     for images,labels in tqdm(test_loader, total=len(test_loader)):
         images = images.to(myDevice)
         labels = labels.to(myDevice)     
-        outputs = myModel(images)   # 在非训练的时候是需要加的，没有这句代码，一些网络层的值会发生变动，不会固定
+        outputs = myModel(images) 
         numbers,predicted = torch.max(outputs.data,1)
         total += labels.size(0)
         correct += (predicted==labels).sum().item()
