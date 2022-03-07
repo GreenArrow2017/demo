@@ -40,12 +40,14 @@ def distort_roteate_crop_transform():
 
 
 # 只有裁剪
+# 裁剪在mnist和cifar中的效果都不是很好，基本是没有效果的了
 def crop_transform():
     transform = nonaugmented_pipeline()
     return transform
 
 
 # 只有旋转
+# 效果不明显，cifar有一点
 def rotation_transform():
     transform = transforms.Compose([transforms.RandomRotation(10), transforms.ToTensor(), transforms.Normalize((0.1307, ), (0.3081, ))])
     return transform
