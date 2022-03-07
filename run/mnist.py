@@ -89,8 +89,9 @@ network.apply(weight_init)
 # 用这个loss记得带softmax，如果是SGD和Adam可以不要
 optimizer = optim.RMSprop(network.parameters(), lr=learning_rate, alpha=0.99, momentum=momentum)
 #设置学习率梯度下降，如果连续三个epoch测试准确率没有上升，则降低学习率
+# StepLR配上ResNet效果好，但是配上CNN就不行了
+# scheduler = StepLR(optimizer, step_size=5, gamma=0.1)
 # 这个真的是好东西
-scheduler = StepLR(optimizer, step_size=5, gamma=0.1)
 scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=3, verbose=True, threshold=0.00005, threshold_mode='rel', cooldown=0, min_lr=0, eps=1e-08)
 #定义存储数据的列表
 train_losses = []
