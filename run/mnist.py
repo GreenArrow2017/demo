@@ -83,7 +83,7 @@ network = mnist_model()
 network.to(device)
 #调用权值初始化函数
 network.apply(weight_init)
-# 设置优化器，用stochastic gradient descent，设置学习率，设置momentum
+# SGD和Adam在cifar上效果比这好，但是在mnist上就不如RMSprop
 #optimizer = optim.SGD(network.parameters(), lr=learning_rate, momentum=momentum)
 #optimizer = optim.Adam(network.parameters(), lr=learning_rate, betas=(0.9, 0.99))
 # 用这个loss记得带softmax，如果是SGD和Adam可以不要
