@@ -2,9 +2,8 @@
 ### MNIST
 1. ResNet + Adam + StepLR : 99.70% 
 2. CNN4层卷积 + RMSprop + ReduceLROnPlateau : **99.75%**  (mnist_9975.py)
-3. CNN5层卷积 + RMSprop + ReduceLROnPlateau : **99.77%**  (mnist_9977.py)
-4. ensemble 5 个CNN +　RMSprop + ReduceLROnPlatea：**99.75%**
-5. ensemble 4 个模型，2个resnet+2个CNN : **99.78%**(ensemble_mnist_9978.py)
+3. ensemble 5 个CNN +　RMSprop + ReduceLROnPlatea：**99.75%**
+4. ensemble 4 个模型，2个resnet+2个CNN : **99.78%**(ensemble_mnist_9978.py)
 ### CIFAR10
 1. ResNet + Weight Standardization[1]: 93.7%。
 2. ResNet18 + pretrain + RandomHorizontalFlip : **97%** (cifar10.py) (RandomVerticalFlip加了反而帮倒忙？)
